@@ -3,7 +3,9 @@ import sqlite3
 import pkg_resources
 import os
 
-CONFIG_FILE_NAME = "config.json"
+
+class setup_config:
+    CONFIG_FILE_NAME = "config.json"
 
 
 def create_db(db_f_name):
@@ -29,10 +31,10 @@ def setup():
     if not "python-telegram-bot" in installed_pkg_list:
         print("python-telegram-bot in not installed\npip install python-telegram-bot")
 
-    if not os.path.isfile(CONFIG_FILE_NAME):
+    if not os.path.isfile(setup_config.CONFIG_FILE_NAME):
         db_file_name = input("DB file name -> ")
         telegram_api_key = input("Telegram bot api key -> ")
-        telegram_bot_owner = input("Bot owner telegram id/name(with @) -> ")
+        telegram_bot_owner = input("Bot owner telegram id -> ")
 
         DB_NAME_STANDART = db_file_name + ".db"
 
@@ -46,12 +48,12 @@ def setup():
                     "telegram_bot_owner": telegram_bot_owner
                 }
             },
-            open(CONFIG_FILE_NAME, "w")
+            open(setup_config.CONFIG_FILE_NAME, "w")
         )
 
         create_db(DB_NAME_STANDART)
 
-    db_file_name = json.load(open(CONFIG_FILE_NAME))["os"]["db_file_name"]
+    db_file_name = json.load(open(setup_config.CONFIG_FILE_NAME))["os"]["db_file_name"]
     if not os.path.isfile(db_file_name):
         create_db(db_file_name)
 
