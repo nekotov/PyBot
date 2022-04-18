@@ -34,7 +34,12 @@ def setup():
     if not os.path.isfile(setup_config.CONFIG_FILE_NAME):
         db_file_name = input("DB file name -> ")
         telegram_api_key = input("Telegram bot api key -> ")
-        telegram_bot_owner = input("Bot owner telegram id -> ")
+        while True:
+            try:
+                telegram_bot_owner = int(input("Bot owner telegram id -> "))
+                break
+            except:
+                pass
 
         DB_NAME_STANDART = db_file_name + ".db"
 
