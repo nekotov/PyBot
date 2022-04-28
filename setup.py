@@ -46,7 +46,8 @@ def setup():
         json.dump(
             {
                 "os": {
-                    "db_file_name": DB_NAME_STANDART
+                    "db_file_name": DB_NAME_STANDART,
+                    "photo_dir": "photos"
                 },
                 "telegram": {
                     "telegram_api_key": telegram_api_key,
@@ -61,6 +62,10 @@ def setup():
     db_file_name = json.load(open(setup_config.CONFIG_FILE_NAME))["os"]["db_file_name"]
     if not os.path.isfile(db_file_name):
         create_db(db_file_name)
+
+    dir = json.load(open(setup_config.CONFIG_FILE_NAME))["os"]["photo_dir"]
+    if not os.path.exists(dir):
+        os.mkdir(dir)
 
 
 if __name__ == "__main__":
