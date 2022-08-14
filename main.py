@@ -43,6 +43,7 @@ def file_handler(update: Update, context: CallbackContext) -> None:
             for k, v in img._getexif().items()
             if k in PIL.ExifTags.TAGS
         }
+        logger.info(exif)
         logger.info(exif["DateTime"])
     except Exception as e:
         logger.warning(e)
